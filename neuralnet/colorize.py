@@ -7,18 +7,12 @@ import matplotlib.pyplot as plt
 import scipy.ndimage.interpolation as sni
 import caffe
 import argparse
+import gcm
 
-def parse_args():
-    parser = argparse.ArgumentParser(description = 'iColor: deep interactive colorization')
-    parser.add_argument('-img_in', dest = 'img_in', help = 'grayscale image to read in', type = str)
-    parser.add_argument('-img_out', dest = 'img_out', help = 'colorized image to save off', type = str)
-    args = parser.parse_args()
-    return args
-
-if __name__ == '__main__':
+def colorize(img_in, img_out, token):
 	prototxt = "./deploy.prototxt";
 	caffemodel = "./release.caffemodel"
-	args = parse_args()
+	
 	caffe.set_mode_cpu()
 
 	# Select desired model
@@ -31,7 +25,7 @@ if __name__ == '__main__':
 	net.params['class8_ab'][0].data[:, :, 0, 0] = pts_in_hull.transpose((1, 0)) # populate cluster centers as 1x1 convolution kernel
 
 	# load the original image
-	img_rgb = caffe.io.load_image(args.img_in)
+	img_rgb = caffe.io.load_image(img_in)
 
 	img_lab = color.rgb2lab(img_rgb) # convert image to lab color space
 	img_l = img_lab[:, :, 0] # pull out L channel
@@ -50,4 +44,8 @@ if __name__ == '__main__':
 	img_lab_out = np.concatenate((img_l[:, :, np.newaxis], ab_dec_us), axis = 2) # concatenate with original image L
 	img_rgb_out = (255 * np.clip(color.lab2rgb(img_lab_out), 0, 1)).astype('uint8') # convert back to rgb
 
-	plt.imsave(args.img_out, img_rgb_out)
+	plt.imsave(img_out, img_rgb_out)
+
+	gcm = GCM("AIzaSyBk6qJ9tIij0GCezqDUfGu-IekXmbayE2k")
+	data = {'filename': img_out}
+	gcm.plaintext_request(registration_id=token, data=data)
