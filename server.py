@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from bottle import *
-from neuralnet import *
+from neuralnet import colorize
 
 @post('/load')
 def load():
