@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import scipy.ndimage.interpolation as sni
 import caffe
 import argparse
-import gcm
+from gcm import GCM
 
 def colorize(img_in, img_out, token):
 	prototxt = "./neuralnet/deploy.prototxt";
