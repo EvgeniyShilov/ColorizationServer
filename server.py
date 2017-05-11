@@ -11,7 +11,7 @@ def load():
     f = open(".\\storage\\input\\" + id + ".png", "wb")
     f.write(img.decode('base64'))
     f.close()
-    neuralnet.colorize(".\\storage\\input\\" + id + ".png", ".\\storage\\output\\" + id + ".png", token)
+    colorize.colorize(".\\storage\\input\\" + id + ".png", ".\\storage\\output\\" + id + ".png", token)
 
 @get("/get")
 def get():
