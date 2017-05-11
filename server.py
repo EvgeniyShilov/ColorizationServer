@@ -11,7 +11,7 @@ def load():
     f = open("./storage/input/" + id + ".jpg", "wb")
     f.write(img.decode('base64'))
     f.close()
-    colorize.colorize("../storage/input/" + id + ".jpg", "../storage/output/" + id + ".png", token)
+    colorize.colorize("./storage/input/" + id + ".jpg", "./storage/output/" + id + ".png", token)
 
 @get("/get")
 def get():
