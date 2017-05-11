@@ -10,8 +10,8 @@ import argparse
 import gcm
 
 def colorize(img_in, img_out, token):
-	prototxt = "./deploy.prototxt";
-	caffemodel = "./release.caffemodel"
+	prototxt = "./neuralnet/deploy.prototxt";
+	caffemodel = "./neuralnet/release.caffemodel"
 	
 	caffe.set_mode_cpu()
 
@@ -21,7 +21,7 @@ def colorize(img_in, img_out, token):
 	(H_in, W_in) = net.blobs['data_l'].data.shape[2:] # get input shape
 	(H_out, W_out) = net.blobs['class8_ab'].data.shape[2:] # get output shape
 
-	pts_in_hull = np.load('./resource.npy') # load cluster centers
+	pts_in_hull = np.load('./neuralnet/resource.npy') # load cluster centers
 	net.params['class8_ab'][0].data[:, :, 0, 0] = pts_in_hull.transpose((1, 0)) # populate cluster centers as 1x1 convolution kernel
 
 	# load the original image
