@@ -18,4 +18,4 @@ def get():
     f.close()
     return img
 
-run(host='172.17.0.2', port=8080, debug=True)
+run(host='localhost', port=8080, debug=True)
