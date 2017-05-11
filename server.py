@@ -16,7 +16,7 @@ def load():
 @get("/get")
 def get():
     id = request.get_header("id")
-    f = open("./storage/output/" + id + ".png", "rb")
+    f = open(id, "rb")
     img = f.read().encode("base64")
     f.close()
     return img
