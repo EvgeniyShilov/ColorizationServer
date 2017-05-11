@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from bottle import *
-from neuralnet\colorize import *
+from neuralnet import *
 
 @post('/load')
 def load():
@@ -11,7 +11,7 @@ def load():
     f = open(".\\storage\\input\\" + id + ".png", "wb")
     f.write(img.decode('base64'))
     f.close()
-    colorize(".\\storage\\input\\" + id + ".png", ".\\storage\\output\\" + id + ".png", token)
+    neuralnet.colorize(".\\storage\\input\\" + id + ".png", ".\\storage\\output\\" + id + ".png", token)
 
 @get("/get")
 def get():
