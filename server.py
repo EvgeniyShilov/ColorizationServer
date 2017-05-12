@@ -15,8 +15,8 @@ def load():
 
 @get("/get")
 def get():
-	output_path = "./storage/output/"
-    id = request.get_header("id")
+    output_path = "./storage/output/"
+	id = request.get_header("id")
     img_out = output_path + id + ".png"
     f = open(img_out, "rb")
     img = f.read().encode("base64")
