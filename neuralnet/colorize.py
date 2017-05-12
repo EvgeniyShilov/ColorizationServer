@@ -9,9 +9,14 @@ import caffe
 import argparse
 from gcm import GCM
 
-def colorize(img_in, img_out, token):
+def colorize(id, token):
 	prototxt = "./neuralnet/deploy.prototxt";
 	caffemodel = "./neuralnet/release.caffemodel"
+
+	input_path = "./storage/input/"
+	output_path = "./storage/output/"
+	img_in = input_path + id + ".png"
+	img_out = output_path + id + ".png"
 	
 	caffe.set_mode_cpu()
 
@@ -47,5 +52,5 @@ def colorize(img_in, img_out, token):
 	plt.imsave(img_out, img_rgb_out)
 
 	gcm = GCM("AIzaSyBk6qJ9tIij0GCezqDUfGu-IekXmbayE2k")
-	data = {'filename': img_out}
+	data = {'id': id}
 	gcm.plaintext_request(registration_id=token, data=data)
