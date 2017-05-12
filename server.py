@@ -5,6 +5,7 @@ from neuralnet import colorize
 
 @post('/load')
 def load():
+    input_path = "./storage/input/"
     img = request.body.read()
     id = request.get_header("id")
     token = request.get_header("token")
