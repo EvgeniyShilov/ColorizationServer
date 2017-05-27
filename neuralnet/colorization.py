@@ -25,8 +25,8 @@ def colorize(id, token):
 	(H_in, W_in) = net.blobs['data_l'].data.shape[2:]
 	(H_out, W_out) = net.blobs['class8_ab'].data.shape[2:]
 
-	#pts_in_hull = np.load('./neuralnet/resource.npy')
-	#net.params['class8_ab'][0].data[:, :, 0, 0] = pts_in_hull.transpose((1, 0))
+	pts_in_hull = np.load('./neuralnet/resource.npy')
+	net.params['class8_ab'][0].data[:, :, 0, 0] = pts_in_hull.transpose((1, 0))
 
 	img_rgb = caffe.io.load_image(img_in)
 
