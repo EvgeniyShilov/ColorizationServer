@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import scipy.ndimage.interpolation as sni
 import caffe
 import argparse
-from gcm import GCM
+import notifier
 
 def colorize(id, token):
 	prototxt = "./neuralnet/deploy.prototxt";
@@ -51,6 +51,4 @@ def colorize(id, token):
 
 	plt.imsave(img_out, img_rgb_out)
 
-	gcm = GCM("AIzaSyBk6qJ9tIij0GCezqDUfGu-IekXmbayE2k")
-	data = {'id': id}
-	gcm.plaintext_request(registration_id=token, data=data)
+	notifier.notify(id, token)

@@ -2,7 +2,7 @@
 
 from threading import *
 from bottle import *
-from neuralnet import colorize
+from neuralnet import colorization
 
 @post('/load')
 def load():
@@ -13,7 +13,7 @@ def load():
     f = open(input_path + id + ".png", "wb")
     f.write(img.decode('base64'))
     f.close()
-    t = threading.Thread(target=colorize.colorize, args=(id, token))
+    t = threading.Thread(target=colorization.colorize, args=(id, token))
     t.start()
 
 @get("/get")
