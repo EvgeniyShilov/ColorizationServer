@@ -50,6 +50,6 @@ def colorize(id, token):
 
 	plt.imsave(img_out, img_rgb_out)
 	toc = time()
-	print("Time: " + toc - tic)
+	print(toc - tic)
 
 	notifier.notify(id, token)
