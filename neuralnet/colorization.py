@@ -8,8 +8,10 @@ import scipy.ndimage.interpolation as sni
 import caffe
 import argparse
 import notifier
+from time import time
 
 def colorize(id, token):
+	tic = time();
 	prototxt = "./neuralnet/deploy.prototxt";
 	caffemodel = "./neuralnet/release.caffemodel"
 
@@ -47,5 +49,7 @@ def colorize(id, token):
 	img_rgb_out = (255 * np.clip(color.lab2rgb(img_lab_out), 0, 1)).astype('uint8')
 
 	plt.imsave(img_out, img_rgb_out)
+	toc = time()
+	print("Time: " + toc - tic)
 
 	notifier.notify(id, token)
